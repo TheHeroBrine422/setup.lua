@@ -133,6 +133,8 @@ function LuaSelect()
          LuaLFSSU()
       else
          LuaSU()
+      end
+   end   
 end   
 function Select()
   clear()
