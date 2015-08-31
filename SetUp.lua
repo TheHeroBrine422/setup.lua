@@ -1,6 +1,7 @@
 #!/usr/local/bin/lua
 
 --Configuration
+SetupDir = "/Users/caleb/Code/Lua/Setup/"
 startCodeDirLua = "/Users/caleb/Code/Lua/"
 startCodeDirHTML = "/Users/caleb/Code/HTML/"
 startCodeDirJava = "/Users/caleb/Code/Java/"
@@ -125,8 +126,13 @@ function ProBar(Title, Speed)
   sleep(Speed)
   clear()
 end
+function ConfigGet()
+   configFile = SetupDir.."config.txt"
+   configFile = io.open(configFile)
+end   
+   
 function LuaSelect()
-   if HLibLua == "y" then
+ if HLibLua == "y" then
       LuaHeroSU()
    else
       if LFSLibLua == "y" then
@@ -137,6 +143,7 @@ function LuaSelect()
    end   
 end   
 function Select()
+  ConfigGet   
   clear()
   io.write("Code Language: ")
   CL = io.read()
