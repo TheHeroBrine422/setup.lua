@@ -5,7 +5,7 @@ startCodeDirLua = "/Users/caleb/Code/Lua/"
 startCodeDirHTML = "/Users/caleb/Code/HTML/"
 startCodeDirJava = "/Users/caleb/Code/Java/"
 HLibLua = "y" -- Hero's Libray for Lua. Will overide LFSLibLua to "y"
-LFSLibLua = "y" -- LuaFileSystem Libray for Lua 
+LFSLibLua = "y" -- LuaFileSystem Libray for Lua
 
 -- from http://lua-cusers.org/wiki/SleepFunction
 local clock = os.clock
@@ -134,8 +134,8 @@ function LuaSelect()
       else
          LuaSU()
       end
-   end   
-end   
+   end
+end
 function Select()
   clear()
   io.write("Code Language: ")
@@ -196,13 +196,15 @@ end
 
 function LuaSU()
   file = io.open(codeDir, "a")
-  file:write("#!/usr/local/bin/lua", "\n")   
-end   
+  file:write("#!/usr/local/bin/lua", "\n")
+  ProBar("Setting Up HTML File "..codeDir, 0.06)  
+end
 
 function LuaLFSSU()
   file = io.open(codeDir, "a")
   file:write("#!/usr/local/bin/lua", "\n")
   file:write("local lfs = require 'lfs'", "\n")
+  ProBar("Setting Up HTML File "..codeDir, 0.06)
 end
 
 function LuaHeroSU()
