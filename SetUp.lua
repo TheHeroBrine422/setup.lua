@@ -4,6 +4,8 @@
 startCodeDirLua = "/Users/caleb/Code/Lua/"
 startCodeDirHTML = "/Users/caleb/Code/HTML/"
 startCodeDirJava = "/Users/caleb/Code/Java/"
+HLibLua = "y" -- Hero's Libray for Lua. Will overide LFSLibLua to "y"
+LFSLibLua = "y" -- LuaFileSystem Libray for Lua 
 
 -- from http://lua-cusers.org/wiki/SleepFunction
 local clock = os.clock
@@ -123,7 +125,17 @@ function ProBar(Title, Speed)
   sleep(Speed)
   clear()
 end
-
+function LuaSelect()
+   if HLibLua == "y" then
+      LuaHeroSU()
+   else
+      if LFSLibLua == "y" then
+         LuaLFSSU()
+      else
+         LuaSU()
+      end
+   end   
+end   
 function Select()
   clear()
   io.write("Code Language: ")
@@ -131,7 +143,7 @@ function Select()
   if CL == "Lua" then
     io.write("Code File Name: ")
     codeDir = startCodeDirLua..io.read()..".lua"
-    LuaSU()
+    LuaSelect()
   else
     if CL == "HTML" then
       io.write("Code File Name: ")
@@ -183,6 +195,17 @@ function HTMLSU()
 end
 
 function LuaSU()
+  file = io.open(codeDir, "a")
+  file:write("#!/usr/local/bin/lua", "\n")   
+end   
+
+function LuaLFSSU()
+  file = io.open(codeDir, "a")
+  file:write("#!/usr/local/bin/lua", "\n")
+  file:write("local lfs = require 'lfs'", "\n")
+end
+
+function LuaHeroSU()
   file = io.open(codeDir, "a")
   file:write("#!/usr/local/bin/lua", "\n")
   file:write("local lfs = require 'lfs'", "\n")
