@@ -4,6 +4,7 @@
 startCodeDirLua = "/Users/caleb/Code/Lua/"
 startCodeDirHTML = "/Users/caleb/Code/HTML/"
 startCodeDirJava = "/Users/caleb/Code/Java/"
+startCodeDirShellScript = "/Users/caleb/Code/SH/"
 HLibLua = "y" -- Hero's Libray for Lua. Will overide LFSLibLua to "y"
 LFSLibLua = "y" -- LuaFileSystem Libray for Lua
 
@@ -159,15 +160,26 @@ function Select()
         JClass = codeDir..io.read()..".java"
         JavaSU()
       else
-        print()
-        print("Invalid Language")
-        sleep(1)
-        Select()
+        if CL == "ShellScript" then
+          io.write("Code File Name: ")
+          codeDir = startCodeDirShellScript..io.read()..".sh"
+          SHSU()
+        else
+          print()
+          print("Invalid Language")
+          sleep(1)
+          Select()
+        end 
       end
     end
   end
 end
 
+function SHSU()
+  file = io.open(codeDir, "a")
+  file:write("", "\n")
+  ProBar("Setting Up ShellScript File"..codeDir, 0,17)
+end
 
 function JavaSU()
   file = io.open(JClass, "a")
