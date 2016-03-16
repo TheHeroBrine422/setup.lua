@@ -5,7 +5,7 @@ Website: home.anthonyandtobie.com:8080/caleb/Code/Setup/
 
 ## Config
 
-### Warning: To be able to edit the config and the changes work you have to put the path of your directory where the config is.
+### Warning: To be able to edit the config and the changes work you have to put the path of your directory where the config is inside of the SetUp.lua file.
 
 ##### The config template is
 
