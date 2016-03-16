@@ -1,6 +1,8 @@
-"/Users/caleb/Code/Lua/Setup/"
-"/Users/caleb/Code/Lua/"
-"/Users/caleb/Code/HTML/"
-"/Users/caleb/Code/Java/"
-"y"
-"y"
+/Users/caleb/Code/Lua/
+/Users/caleb/Code/HTML/
+/Users/caleb/Code/Java/
+/Users/caleb/Code/ShSc/
+y
+n
+
+This is Hero's configuration 

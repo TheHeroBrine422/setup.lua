@@ -1,12 +1,12 @@
 #!/usr/local/bin/lua
 
 --Configuration
-SetupDir = "/Users/caleb/Code/Lua/Setup/"
-startCodeDirLua = "/Users/caleb/Code/Lua/"
-startCodeDirHTML = "/Users/caleb/Code/HTML/"
-startCodeDirJava = "/Users/caleb/Code/Java/"
-HLibLua = "y" -- Hero's Libray for Lua. Will overide LFSLibLua to "y"
-LFSLibLua = "y" -- LuaFileSystem Libray for Lua
+SetupDir = "/Users/caleb/Code/GithubRepos/setuplua/"
+startCodeDirLua = 0
+startCodeDirHTML = 0
+startCodeDirJava = 0
+HLibLua = 0
+LFSLibLua = 0
 
 -- from http://lua-cusers.org/wiki/SleepFunction
 local clock = os.clock
@@ -126,11 +126,35 @@ function ProBar(Title, Speed)
   sleep(Speed)
   clear()
 end
+
+function file_exists(file)
+  local f = io.open(file, "rb")
+  if f then f:close() end
+  return f ~= nil
+end
+
+function readData(file)
+  if not file_exists(file) then return {} end
+  lines = {}
+  for line in io.lines(file) do
+    lines[#lines + 1] = line
+  end
+  return lines
+end
+
 function ConfigGet()
    configFile = SetupDir.."config.txt"
-   configFile = io.open(configFile)
-end   
-   
+   config = readData(configFile)
+   startCodeDirLua = config[1]
+   startCodeDirHTML = config[2]
+   startCodeDirShellScript = config[2]
+   startCodeDirJava = config[4]
+   HLibLua = config[5]
+   LFSLibLua = config[6]
+   print(config[1])
+   print(startCodeDirLua) 
+end
+
 function LuaSelect()
  if HLibLua == "y" then
       LuaHeroSU()
@@ -143,8 +167,7 @@ function LuaSelect()
    end
 end
 function Select()
-  ConfigGet   
-  clear()
+  ConfigGet()
   io.write("Code Language: ")
   CL = io.read()
   if CL == "Lua" then
@@ -166,15 +189,29 @@ function Select()
         JClass = codeDir..io.read()..".java"
         JavaSU()
       else
-        print()
-        print("Invalid Language")
-        sleep(1)
-        Select()
+        if CL == "ShellScript" then
+          io.write("Code File Name: ")
+          codeDir = startCodeDirShellScript..io.read()..".sh"
+          SHSU()
+        else
+          if CL == "Exit" then
+          else
+            print()
+            print("Invalid Language")
+            sleep(1)
+            Select()
+          end
+        end
       end
     end
   end
 end
 
+function SHSU()
+  file = io.open(codeDir, "a")
+  file:write("", "\n")
+  ProBar("Setting Up ShellScript File"..codeDir, 0,17)
+end
 
 function JavaSU()
   file = io.open(JClass, "a")
@@ -200,14 +237,14 @@ end
 function LuaSU()
   file = io.open(codeDir, "a")
   file:write("#!/usr/local/bin/lua", "\n")
-  ProBar("Setting Up HTML File "..codeDir, 0.06)
+  ProBar("Setting Up Lua File "..codeDir, 0.06)
 end
 
 function LuaLFSSU()
   file = io.open(codeDir, "a")
   file:write("#!/usr/local/bin/lua", "\n")
   file:write("local lfs = require 'lfs'", "\n")
-  ProBar("Setting Up HTML File "..codeDir, 0.06)
+  ProBar("Setting Up Lua File "..codeDir, 0.06)
 end
 
 function LuaHeroSU()
