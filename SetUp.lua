@@ -151,8 +151,6 @@ function ConfigGet()
    startCodeDirJava = config[4]
    HLibLua = config[5]
    LFSLibLua = config[6]
-   print(config[1])
-   print(startCodeDirLua) 
 end
 
 function LuaSelect()
