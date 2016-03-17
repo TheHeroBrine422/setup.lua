@@ -147,8 +147,8 @@ function ConfigGet()
    config = readData(configFile)
    startCodeDirLua = config[1]
    startCodeDirHTML = config[2]
-   startCodeDirShellScript = config[2]
-   startCodeDirJava = config[4]
+   startCodeDirShellScript = config[4]
+   startCodeDirJava = config[3]
    HLibLua = config[5]
    LFSLibLua = config[6]
 end
@@ -165,6 +165,7 @@ function LuaSelect()
    end
 end
 function Select()
+  clear()
   ConfigGet()
   io.write("Code Language: ")
   CL = io.read()
@@ -184,7 +185,8 @@ function Select()
         dir = "mkdir "..codeDir
         os.execute(dir)
         io.write("Code Class Name: ")
-        JClass = codeDir..io.read()..".java"
+        JClass = io.read()
+        JClassFile = codeDir..JClass..".java"
         JavaSU()
       else
         if CL == "ShellScript" then
@@ -207,18 +209,18 @@ end
 
 function SHSU()
   file = io.open(codeDir, "a")
-  file:write("", "\n")
+  file:write("#!/bin/bash", "\n")
   ProBar("Setting Up ShellScript File"..codeDir, 0,17)
 end
 
 function JavaSU()
-  file = io.open(JClass, "a")
+  file = io.open(JClassFile, "a")
   file:write("import java.util.Scanner;", "\n")
-  file:write("class Test {", "\n")
+  file:write("class "..JClass.." {", "\n")
   file:write("public static void main(String[] args){", "\n", "\n")
   file:write("}", "\n")
   file:write("}", "\n", "\n")
-  ProBar("Setting Up Java File "..codeDir, 0.17)
+  ProBar("Setting Up Java File "..JClassFile, 0.06)
 end
 
 function HTMLSU()
@@ -229,7 +231,7 @@ function HTMLSU()
   file:write("<title></title>", "\n")
   file:write("</body>", "\n")
   file:write("</html>", "\n")
-  ProBar("Setting Up HTML File "..codeDir, 0.17)
+  ProBar("Setting Up HTML File "..codeDir, 0.06)
 end
 
 function LuaSU()
