@@ -149,8 +149,10 @@ function ConfigGet()
    startCodeDirHTML = config[2]
    startCodeDirShellScript = config[4]
    startCodeDirJava = config[3]
-   HLibLua = config[5]
-   LFSLibLua = config[6]
+   startCodeDirLove = config[5]
+   HLibLua = config[6]
+   LFSLibLua = config[7]
+   AssetFolderAdd = config[8]
 end
 
 function LuaSelect()
@@ -163,6 +165,16 @@ function LuaSelect()
          LuaSU()
       end
    end
+end
+function LoveSelect()
+ if AssetFolderAdd == "y" then
+   dir = "mkdir "..codeDir.."Assets/"
+   os.execute(dir)
+   ProBar("Setting Up Love Assets Folder in "..codeDir, 0.02)
+   LoveSU()
+ else
+   LoveSU()
+ end
 end
 function Select()
   clear()
@@ -194,12 +206,20 @@ function Select()
           codeDir = startCodeDirShellScript..io.read()..".sh"
           SHSU()
         else
-          if CL == "Exit" then
+          if CL == "Love" then
+              io.write("Code Project Name: ")
+              codeDir = startCodeDirLove..io.read().."/"
+              dir = "mkdir "..codeDir
+              os.execute(dir)
+              LoveSelect()
           else
-            print()
-            print("Invalid Language")
-            sleep(1)
-            Select()
+            if CL == "Exit" then
+            else
+              print()
+              print("Invalid Language")
+              sleep(1)
+              Select()
+            end
           end
         end
       end
@@ -211,6 +231,26 @@ function SHSU()
   file = io.open(codeDir, "w")
   file:write("#!/bin/bash", "\n")
   ProBar("Setting Up ShellScript File"..codeDir, 0,17)
+end
+
+function LoveSU()
+  file = io.open(codeDir.."main.lua", "w")
+  file:write("debug = true", "\n", "\n")
+  file:write("function love.load(arg)", "\n", "\n")
+  file:write("end", "\n", "\n")
+  file:write("function love.update(dt)", "\n", "\n")
+  file:write("end", "\n", "\n")
+  file:write("function love.draw(dt)", "\n", "\n")
+  file:write("end", "\n")
+  ProBar("Setting Up Love main.lua File in "..codeDir, 0.06)
+  file = io.open(codeDir.."conf.lua", "w")
+  file:write("function love.conf(t)", "\n")
+  file:write("	t.title = '' -- The title of the window the game is in (string)", "\n")
+  file:write("	t.version = '0.10.0'         -- The LÖVE version this game was made for (string)", "\n")
+  file:write("	t.window.width = 700", "\n")
+  file:write("	t.window.height = 700", "\n")
+  file:write("end", "\n")
+  ProBar("Setting Up Love conf.lua File in "..codeDir, 0.06)
 end
 
 function JavaSU()

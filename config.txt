@@ -2,7 +2,9 @@
 /Users/caleb/Code/HTML/
 /Users/caleb/Code/Java/
 /Users/caleb/Code/ShSc/
+/Users/caleb/Code/
 y
 n
+y
 
 This is Hero's configuration
