@@ -19,9 +19,9 @@ Folder/Where/ShellScript/files/go
 
 Folder/Where/Love/Projects/go
 
-y or n for Hero's Library which overrides LuaFileSystem Library
+y or n for Hero's Library which overrides LuaFileSystem Library added to Lua Projects
 
-y or n for LuaFileSystem Library
+y or n for LuaFileSystem Library added to Lua Projects
 
 y or n for Automaticly adding Assets folder to Love Projects
 
