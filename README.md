@@ -1,7 +1,5 @@
 # setup-code-program
-My program for setting up files with code.
-
-Website: home.anthonyandtobie.com:8080/caleb/Code/Setup/
+My program for setting up files with code
 
 ## Config
 
