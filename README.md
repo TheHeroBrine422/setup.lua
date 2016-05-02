@@ -25,4 +25,8 @@ y or n for LuaFileSystem Library
 
 y or n for Automaticly adding Assets folder to Love Projects
 
-**The config does not care what you put after line 8**
+y or n for parts of Hero's Library from lua
+
+y or n for parts of Hero's Library from lua and Automaticly adding Assets folder to Love Projects
+
+**The config does not care what you put after line 10**

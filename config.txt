@@ -6,5 +6,7 @@
 y
 n
 y
+n
+n
 
 This is Hero's configuration

@@ -153,6 +153,8 @@ function ConfigGet()
    HLibLua = config[6]
    LFSLibLua = config[7]
    AssetFolderAdd = config[8]
+   HLibLove = config[9]
+   HLibLoveandAssetFolderAdd = config[10]
 end
 
 function LuaSelect()
@@ -173,7 +175,18 @@ function LoveSelect()
    ProBar("Setting Up Love Assets Folder in "..codeDir, 0.02)
    LoveSU()
  else
-   LoveSU()
+   if HLibLove == "y" then
+     HLibLoveSU()
+   else
+     if HLibLoveandAssetFolderAdd == "y" then
+       dir = "mkdir "..codeDir.."Assets/"
+       os.execute(dir)
+       ProBar("Setting Up Love Assets Folder in "..codeDir, 0.02)
+       HLibLoveSU()
+     else
+       LoveSU()
+     end
+   end
  end
 end
 function Select()
@@ -231,6 +244,48 @@ function SHSU()
   file = io.open(codeDir, "w")
   file:write("#!/bin/bash", "\n")
   ProBar("Setting Up ShellScript File"..codeDir, 0,17)
+end
+
+function HLibLoveSU()
+  file = io.open(codeDir.."main.lua", "w")
+  file:write("debug = true", "\n", "\n")
+  file:write("function sleep(n)", "\n")
+  file:write("   local t0 = clock()", "\n")
+  file:write("   while clock() - t0 <= n do end", "\n")
+  file:write("end", "\n")
+  file:write("function file_exists(file)", "\n")
+  file:write("  local f = io.open(file, 'rb')", "\n")
+  file:write("  if f then f:close() end", "\n")
+  file:write("  return f ~= nil", "\n")
+  file:write("end", "\n")
+  file:write("function readData(file)", "\n")
+  file:write("  if not file_exists(file) then return {} end", "\n")
+  file:write("  lines = {}", "\n")
+  file:write("  for line in io.lines(file) do", "\n")
+  file:write("    lines[#lines + 1] = line", "\n")
+  file:write("  end", "\n")
+  file:write("  return lines", "\n")
+  file:write("end", "\n")
+  file:write("function ConfigGet()", "\n")
+  file:write("   configFile = Dir/Where/Config/is..'config.txt'", "\n")
+  file:write("   config = readData(configFile)", "\n")
+  file:write("   varof1stconfigline = config[1]", "\n")
+  file:write("end", "\n", "\n")
+  file:write("function love.load(arg)", "\n", "\n")
+  file:write("end", "\n", "\n")
+  file:write("function love.update(dt)", "\n", "\n")
+  file:write("end", "\n", "\n")
+  file:write("function love.draw(dt)", "\n", "\n")
+  file:write("end", "\n")
+  ProBar("Setting Up Love main.lua File in "..codeDir, 0.06)
+  file = io.open(codeDir.."conf.lua", "w")
+  file:write("function love.conf(t)", "\n")
+  file:write("	t.title = '' -- The title of the window the game is in (string)", "\n")
+  file:write("	t.version = '0.10.0'         -- The LÖVE version this game was made for (string)", "\n")
+  file:write("	t.window.width = 700", "\n")
+  file:write("	t.window.height = 700", "\n")
+  file:write("end", "\n")
+  ProBar("Setting Up Love conf.lua File in "..codeDir, 0.06)
 end
 
 function LoveSU()
