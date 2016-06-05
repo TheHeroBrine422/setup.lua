@@ -1,6 +1,7 @@
 #!/usr/local/bin/lua
 
 --Configuration
+debugmode = false
 SetupDir = "/Users/caleb/Code/GithubRepos/setuplua/"
 startCodeDirLua = 0
 startCodeDirHTML = 0
@@ -18,6 +19,8 @@ end
 function clear()
    os.execute("clear")
 end
+
+import = {}
 
 function ProBar(Title, Speed)
   clear()
@@ -158,6 +161,10 @@ function ConfigGet()
 end
 
 function LuaSelect()
+if debugmode == true then
+ print("HLibLua: "..HLibLua)
+ print("LFSLibLua: "..LFSLibLua)
+end
  if HLibLua == "y" then
       LuaHeroSU()
    else
@@ -168,6 +175,25 @@ function LuaSelect()
       end
    end
 end
+
+function importsfun()
+  if imports == "yes" then
+     io.write("How many imports do you need: ")
+     importsnum = io.read("*number")
+     print(importsnum)
+     for i=1,importsnum do
+           sleep(0.2)
+           io.write("What is the import: ")
+           import[i] = io.read()
+     end
+     JavaSU()
+  else
+    if imports == "no" then
+      JavaSU()
+    end
+  end
+end
+
 function LoveSelect()
  if AssetFolderAdd == "y" then
    dir = "mkdir "..codeDir.."Assets/"
@@ -205,14 +231,21 @@ function Select()
       HTMLSU()
     else
       if CL == "Java" then
-        io.write("Code Project Name: ")
-        codeDir = startCodeDirJava..io.read().."/"
-        dir = "mkdir "..codeDir
-        os.execute(dir)
-        io.write("Code Class Name: ")
-        JClass = io.read()
-        JClassFile = codeDir..JClass..".java"
-        JavaSU()
+        if debugmode == true then
+          CodeDir = startCodeDirJava.."Debug"..os.time()
+          print("PathProjectFolder: "..CodeDir)
+        else
+          io.write("Code Project Name: ")
+          codeDir = startCodeDirJava..io.read().."/"
+          dir = "mkdir "..codeDir
+          os.execute(dir)
+          io.write("Code Class Name: ")
+          JClass = io.read()
+          JClassFile = codeDir..JClass..".java"
+          io.write("Do you want to add any imports (yes/no)? ")
+          imports = io.read()
+          importsfun()
+        end
       else
         if CL == "ShellScript" then
           io.write("Code File Name: ")
@@ -310,7 +343,11 @@ end
 
 function JavaSU()
   file = io.open(JClassFile, "w")
-  file:write("import java.util.Scanner;", "\n")
+  if imports == "yes" then
+    for i=1,importsnum do
+  file:write("import "..import[i]..";","\n")
+    end
+  end
   file:write("class "..JClass.." {", "\n")
   file:write("public static void main(String[] args){", "\n", "\n")
   file:write("}", "\n")
