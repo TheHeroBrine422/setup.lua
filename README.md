@@ -1,9 +1,9 @@
-# setup-code-program
+# setup.lua
 My program for setting up files with code
 
-## Config
+## Terminal
 
-### Warning: To be able to edit the config and the changes work you have to put the path of your directory where the config is inside of the SetUp.lua file.
+### Config
 
 **The config template is**
 
@@ -29,8 +29,28 @@ y or n for parts of Hero's Library from lua and Automaticly adding Assets folder
 
 **The config does not care what you put after line 10**
 
-## Errors
+### Errors
 
-If the error is simmilar to "lua: SetUp.lua:172: attempt to index a nil value (global 'file')" then you have selected invalid file.
+If the error is simmilar to "lua: SetUp.lua:172: attempt to index a nil value (global 'file')" then you have selected a invalid file.
 
 If the error is simmilar to "lua: SetUp.lua:210: attempt to concatenate a nil value (global 'startCodeDirLua')" then the path to the config file is wrong.
+
+## License
+
+Human Readable: https://creativecommons.org/licenses/by-nc/4.0/
+
+Legal Code: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+## GUI
+
+## Credits
+
+#### Developer
+
+Caleb J. / Hero / [calebjones422](https://github.com/calebjones422 "Github")
+
+#### Art (GUI)
+
+Logo: Caleb J. / Hero / [calebjones422](https://github.com/calebjones422 "Github") (Combined Art) and Mike C. / [MikeColeCo](https://github.com/MikeColeCo "Github") (Original Art)
+
+Buttons: Caleb J. / Hero / [calebjones422](https://github.com/calebjones422 "Github") made with [ImageFu button maker](https://www.imagefu.com/create/button)
