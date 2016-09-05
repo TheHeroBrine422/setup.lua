@@ -1,5 +1,4 @@
 #!/bin/bash
-OUTPUT="$(pwd)"
-echo "${OUTPUT}"
-cd ~
-echo "${OUTPUT}" >> where
+DIR=$(dirname $(which $0));
+echo $DIR >> ~/where
+echo $DIR
